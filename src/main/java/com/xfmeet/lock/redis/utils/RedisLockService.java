@@ -6,18 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
+
 /**
  * @author meet
  */
 @Component
 public class RedisLockService {
 
-    private static RedissonClient redissonClient;
-
     @Autowired
-    public void setRedissonClient(RedissonClient locker) {
-        redissonClient = locker;
-    }
+    private RedissonClient redissonClient;
 
     /**
      * by lockKey to lock
