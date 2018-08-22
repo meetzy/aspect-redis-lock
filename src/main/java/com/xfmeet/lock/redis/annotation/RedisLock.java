@@ -18,7 +18,7 @@ public @interface RedisLock {
      *
      * @return
      */
-    String lockKey();
+    String lockKey() default "redis_lock_key";
 
     /**
      * is use wait get lock

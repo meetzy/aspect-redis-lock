@@ -4,10 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author xp_zy
- * @date 2018/8/22 16:02
- * @company codingApi
- * @description
+ * @author meet
  */
 @Configuration
 @ConfigurationProperties(prefix = "spring.redis")
