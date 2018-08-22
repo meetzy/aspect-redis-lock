@@ -30,15 +30,13 @@ public class RedisLockAspect {
     }
 
     @Around("lockAspect()")
-    public Object around(ProceedingJoinPoint joinPoint) {
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         RedisLock redisLock = getRedisLock(joinPoint);
         boolean tryRes = getRLock(redisLock);
         Object obj = null;
         if (tryRes) {
             try {
                 obj = joinPoint.proceed();
-            } catch (Throwable e) {
-                e.printStackTrace();
             } finally {
                 redisLockService.unlock(redisLock.lockKey());
             }
