@@ -2,6 +2,7 @@ package com.xfmeet.lock.redis.aspect;
 
 
 import com.xfmeet.lock.redis.annotation.RedisLock;
+import com.xfmeet.lock.redis.exception.LockException;
 import com.xfmeet.lock.redis.utils.RedisLockService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,6 +11,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -18,6 +20,7 @@ import java.lang.reflect.Method;
  * @author meet
  */
 @Aspect
+@Order(1)
 @Component
 public class RedisLockAspect {
 
@@ -33,26 +36,24 @@ public class RedisLockAspect {
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         RedisLock redisLock = getRedisLock(joinPoint);
         boolean tryRes = getRLock(redisLock);
-        Object obj = null;
         if (tryRes) {
             try {
-                obj = joinPoint.proceed();
+                return joinPoint.proceed();
             } finally {
                 redisLockService.unlock(redisLock.lockKey());
             }
         }
-        // todo 直接返回null是否妥当？ 处理是否需要解耦去支持自定义获得锁的方式？
-        return obj;
+        return new LockException(joinPoint.getSignature().getName() + "method don`t get lock!");
     }
 
-    private boolean getRLock(RedisLock redisLock) {
-        if (redisLock.isTry()) {
-            return redisLockService.tryLock(redisLock.lockKey(), redisLock.unitType(), redisLock.waitTime(), redisLock.quitTime());
+    private boolean getRLock(RedisLock r) {
+        if (r.isTry()) {
+            return redisLockService.tryLock(r.lockKey(), r.unitType(), r.waitTime(), r.quitTime());
         } else {
-            if (redisLock.quitTime() == 0) {
-                return redisLockService.lock(redisLock.lockKey());
+            if (r.quitTime() == 0) {
+                return redisLockService.lock(r.lockKey());
             }
-            return redisLockService.lock(redisLock.lockKey(), redisLock.quitTime(), redisLock.unitType());
+            return redisLockService.lock(r.lockKey(), r.quitTime(), r.unitType());
         }
     }
 
