@@ -41,6 +41,7 @@ public class RedisLockAspect {
                 redisLockService.unlock(redisLock.lockKey());
             }
         }
+        // todo 直接返回null是否妥当？ 处理是否需要解耦去支持自定义获得锁的方式？
         return obj;
     }
 

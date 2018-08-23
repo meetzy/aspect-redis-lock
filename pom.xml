@@ -40,6 +40,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
         <version.spring-boot>2.0.4.RELEASE</version.spring-boot>
+        <version.redisson>2.11.5</version.redisson>
     </properties>
 
     <dependencies>
@@ -65,14 +66,13 @@
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
-            <version>2.11.5</version>
+            <version>${version.redisson}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.7</version>
-            <optional>true</optional>
         </dependency>
 
     </dependencies>

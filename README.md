@@ -14,6 +14,11 @@
 
     配置isTry=true开启等待机制，waitTime为等待获得锁的时长
 
+### 3.思考
+1. 获得锁失败直接返回null是否合理
+2. 获得锁的方式方法支持自定义拓展
+3. 处理与切面切解耦
+
 ---
 
 感谢[小柒2012](https://gitee.com/52itstyle/spring-boot-seckill)给的秒杀案例启发
