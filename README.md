@@ -5,18 +5,16 @@
 2. SentinelServersConfig 哨兵模式
 3. ClusterServersConfig 集群模式
 4. MasterSlaveServersConfig 主从模式
+
 未完待续...
 ### 2.使用方式
 在需要的方法上使用@RedisLock注解
 1. 直接获得锁
-    默认不会加锁时长过久自动释放锁，可以设置quitTime不为0启用自动释放锁
+    一直阻塞线程直到获得锁，默认不会自动释放锁，可以设置quitTime>0启用超时自动释放锁
 2. 尝试等待获得锁
-    配置isTry=true开启等待机制，waitTime为等待获得锁的时长
-### 3.思考
-1. 获得锁失败直接返回null是否合理
-2. 获得锁的方式方法支持自定义拓展
-3. 处理与切面切解耦
-4. 异步方式的锁获得
+    配置isTry=true开启等待机制，waitTime为等待获得锁的时长，在此时间内没有获得锁抛出异常
+### 3.目前测试
+1. 使用了@RedisLock分布式锁之后QPS只有无锁的3/5的性能？目前没有测试使用ZK的QPS
 
 ---
 
