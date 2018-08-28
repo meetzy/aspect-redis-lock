@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author meet
+ * @author meetzy
  */
 @Component
 public class RedisLockService {
