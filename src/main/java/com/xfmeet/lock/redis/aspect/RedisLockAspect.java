@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
  * @author meetzy
  */
 @Aspect
-@Order(1)
+@Order(Integer.MIN_VALUE)
 @Component
 public class RedisLockAspect {
 
