@@ -1,4 +1,4 @@
-# 一个基于redisson的分布式锁插件
+# 一个基于redisson的分布式锁插件  仅供简单的学习参考
 ### 1.配置
 默认单机模式，读取spring的reids设置，可以自行配置RedissonClient 
 1. SingleServerConfig 单机模式
