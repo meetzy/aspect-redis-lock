@@ -40,7 +40,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>1.8</version.java>
         <version.spring-boot>2.0.4.RELEASE</version.spring-boot>
-        <version.redisson>2.11.5</version.redisson>
+        <version.redisson>3.22.0</version.redisson>
     </properties>
 
     <dependencies>
